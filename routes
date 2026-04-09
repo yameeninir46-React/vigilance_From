@@ -1,0 +1,10 @@
+router.get("/reports/:bpNumber", async (req, res) => {
+  const { bpNumber } = req.params;
+  console.log("Searching for BP:", bpNumber);
+
+  const report = await Report.findOne({ bpNumber: String(bpNumber) });
+  if (!report) {
+    return res.status(404).json({ message: "Data not found" });
+  }
+  res.json(report);
+});
